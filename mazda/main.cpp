@@ -214,7 +214,8 @@ int main (int argc, char *argv[])
             std::mutex quitmutex;
 
             std::thread nm_thread([&quitcv, &quitmutex](){ nightmode_thread_func(quitcv, quitmutex); } );
-            std::thread gp_thread([&quitcv, &quitmutex](){ gps_thread_func(quitcv, quitmutex); } );
+            //Don't use the built-in nav GPU
+            //std::thread gp_thread([&quitcv, &quitmutex](){ gps_thread_func(quitcv, quitmutex); } );
 
             /* Start gstreamer pipeline and main loop */
 
@@ -236,8 +237,9 @@ int main (int argc, char *argv[])
             printf("waiting for nm_thread\n");
             nm_thread.join();
 
-            printf("waiting for gps_thread\n");
-            gp_thread.join();
+            //Don't use the built-in nav GPU
+            //printf("waiting for gps_thread\n");
+            //gp_thread.join();
 
             printf("shutting down\n");
 
